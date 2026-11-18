@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smoky Mountain Investor Report | SCALE with LPT Realty</title>
+<meta name="description" content="Read the Smoky Mountain Investor Report, SCALE's monthly market intelligence on Sevier County, Gatlinburg, Pigeon Forge and the East Tennessee corridor.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#101F33;--navy2:#172a44;--gold:#C9A861;--off:#FAFAF7;--ink:#1d2733;--mute:#7c8794}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:transparent;color:var(--ink);font-family:Inter,Arial,sans-serif}
+body.standalone{background:var(--off)}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 20px}
+.eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;color:var(--navy)}
+/* latest */
+.latest{display:flex;gap:28px;align-items:center;background:var(--navy);border-radius:6px;padding:26px;color:#fff}
+.latest .cover{flex:0 0 46%;aspect-ratio:4/3;background:#0b1626;border:1px solid rgba(201,168,97,.35);border-radius:4px;overflow:hidden;cursor:pointer;position:relative}
+.latest .cover canvas,.card .cover canvas{width:100%;height:100%;object-fit:cover;display:block}
+.latest h2{color:#fff;font-size:34px;line-height:1.1;margin:8px 0 10px}
+.latest p{color:#c9d1db;font-size:15px;line-height:1.6;margin-bottom:20px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:3px;font:600 13px Inter,Arial;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:1px solid var(--gold);text-decoration:none}
+.btn.gold{background:var(--gold);color:var(--navy)}
+.btn.ghost{background:transparent;color:var(--gold)}
+.btn:hover{filter:brightness(1.08)}
+/* archive */
+.year{margin:30px 0 14px;display:flex;align-items:center;gap:14px}
+.year h3{font-size:26px}
+.year:after{content:"";flex:1;height:1px;background:rgba(201,168,97,.5)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
+.card{background:#fff;border:1px solid #e6e1d6;border-radius:5px;overflow:hidden;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(16,31,51,.12)}
+.card .cover{aspect-ratio:4/3;background:var(--navy2);position:relative}
+.card .meta{padding:14px 16px 16px}
+.card h4{font:600 20px 'Cormorant Garamond',Georgia,serif;color:var(--navy)}
+.card .sub{font-size:12px;color:var(--mute);margin-top:3px}
+.tag{position:absolute;top:10px;left:10px;background:var(--gold);color:var(--navy);font:700 10px Inter;letter-spacing:.14em;padding:5px 8px;border-radius:2px;z-index:2}
+.ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(201,168,97,.7);font:600 13px Inter;letter-spacing:.1em}
+.msg{padding:30px;text-align:center;color:var(--mute);font-size:14px}
+/* viewer */
+.viewer{position:fixed;inset:0;background:rgba(8,15,26,.97);z-index:9999;display:none;flex-direction:column}
+.viewer.on{display:flex}
+.vbar{display:flex;align-items:center;gap:14px;padding:12px 18px;color:#fff;border-bottom:1px solid rgba(201,168,97,.25)}
+.vbar .t{font:600 19px 'Cormorant Garamond',Georgia,serif;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vbar .t small{font:500 11px Inter;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-right:10px}
+.ib{background:none;border:1px solid rgba(255,255,255,.18);color:#fff;border-radius:3px;height:36px;min-width:36px;padding:0 12px;cursor:pointer;font:600 12px Inter;letter-spacing:.06em;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.ib:hover{border-color:var(--gold);color:var(--gold)}
+.stage{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;touch-action:pan-y}
+.stage canvas{max-width:calc(100% - 120px);max-height:calc(100% - 30px);box-shadow:0 20px 60px rgba(0,0,0,.5);background:#fff}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:rgba(16,31,51,.85);border:1px solid rgba(201,168,97,.5);color:var(--gold);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.nav:disabled{opacity:.25;cursor:default}
+.prev{left:16px}.next{right:16px}
+.vfoot{display:flex;align-items:center;justify-content:center;gap:16px;padding:10px;color:#c9d1db;font:500 13px Inter}
+.prog{width:200px;height:3px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--gold);width:0;transition:width .2s}
+.spin{position:absolute;color:var(--gold);font:500 13px Inter;letter-spacing:.14em}
+@media(max-width:720px){.latest{flex-direction:column;padding:18px}.latest .cover{flex:none;width:100%}.latest h2{font-size:28px}
+.stage canvas{max-width:calc(100% - 16px)}.nav{width:38px;height:38px;font-size:18px;top:auto;bottom:10px;transform:none}.vbar .hide-m{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"><div class="msg">Loading reports…</div></div>
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Report viewer">
+  <div class="vbar">
+    <div class="t" id="vt"></div>
+    <button class="ib hide-m" id="fs" title="Full screen">⤢ Full screen</button>
+    <a class="ib" id="dl" download>↓ <span class="hide-m">Download PDF</span></a>
+    <button class="ib" id="cl" title="Close">✕</button>
+  </div>
+  <div class="stage" id="stage">
+    <div class="spin" id="spin">LOADING…</div>
+    <canvas id="cv"></canvas>
+    <button class="nav prev" id="pv" aria-label="Previous page">‹</button>
+    <button class="nav next" id="nx" aria-label="Next page">›</button>
+  </div>
+  <div class="vfoot"><span id="pg">–</span><div class="prog"><i id="pb"></i></div></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+/* ===== SETTINGS (only edit if the repository is ever renamed) ===== */
+const OWNER='Brandonwlms', REPO='scale-investor-report', FOLDER='reports', BRANCH='main';
+/* ================================================================== */
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const MONTHS=['january','february','march','april','may','june','july','august','september','october','november','december'];
+const qs=new URLSearchParams(location.search);
+const MODE=qs.get('view')||'all';            // latest | archive | all
+if(qs.get('standalone')!=='0' && window===window.top) document.body.classList.add('standalone');
+const app=document.getElementById('app');
+const base=`https://${OWNER.toLowerCase()}.github.io/${REPO}/${FOLDER}/`;
+
+function parse(name){
+  const n=name.replace(/\.pdf$/i,'').replace(/[_|#]+/g,' ').replace(/\s+/g,' ').trim();
+  const low=n.toLowerCase();
+  let m=-1,y=null;
+  const iso=low.match(/(20\d\d)[-_. ](0[1-9]|1[0-2])/); if(iso){y=+iso[1];m=+iso[2]-1}
+  if(m<0){MONTHS.forEach((mm,i)=>{if(m<0&&(low.includes(mm)||new RegExp('\\b'+mm.slice(0,3)+'\\b').test(low)))m=i});}
+  if(!y){const yy=low.match(/20\d\d/);y=yy?+yy[0]:null}
+  const iss=low.match(/issue\s*(\d+)/);
+  const month=m>=0?MONTHS[m][0].toUpperCase()+MONTHS[m].slice(1):n;
+  return {file:name,url:base+encodeURIComponent(name),month,year:y,m,issue:iss?+iss[1]:null,
+          sort:(y||0)*100+(m>=0?m:0)+(iss?+iss[1]/1000:0),title:m>=0?month+' Edition':n};
+}
+
+async function list(){
+  const r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FOLDER}?ref=${BRANCH}`);
+  if(!r.ok) throw new Error('list '+r.status);
+  const j=await r.json();
+  return j.filter(f=>f.type==='file'&&/\.pdf$/i.test(f.name)).map(f=>parse(f.name)).sort((a,b)=>b.sort-a.sort);
+}
+
+const docCache={};
+function getDoc(url){return docCache[url]||(docCache[url]=pdfjsLib.getDocument({url}).promise)}
+async function renderCover(rep,box){
+  try{const d=await getDoc(rep.url);const p=await d.getPage(1);const vp=p.getViewport({scale:1});
+    const s=Math.min(2,900/vp.width);const v=p.getViewport({scale:s});const c=document.createElement('canvas');
+    c.width=v.width;c.height=v.height;await p.render({canvasContext:c.getContext('2d'),viewport:v}).promise;
+    box.querySelector('.ph')?.remove();box.appendChild(c);}catch(e){}
+}
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+
+function drawLatest(r){
+  const sub=[r.issue?'Issue #'+r.issue:null,r.year].filter(Boolean).join(' · ');
+  const el=document.createElement('div');el.className='latest';
+  el.innerHTML=`<div class="cover" data-open><span class="tag">LATEST</span><div class="ph">LOADING COVER…</div></div>
+   <div><div class="eyebrow">Current Edition${sub?' · '+esc(sub):''}</div><h2>${esc(r.title)}</h2>
+   <p>The latest Smoky Mountain Investor Report, read it right here, page by page, or download the PDF to keep.</p>
+   <div class="btns"><button class="btn gold" data-open>Read the Report</button><a class="btn ghost" href="${r.url}" download>Download PDF</a></div></div>`;
+  el.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openViewer(r));
+  app.appendChild(el);renderCover(r,el.querySelector('.cover'));
+}
+
+function drawArchive(reps,newest){
+  const byYear={};reps.forEach(r=>{(byYear[r.year||'Earlier']=byYear[r.year||'Earlier']||[]).push(r)});
+  Object.keys(byYear).sort((a,b)=>b-a).forEach(y=>{
+    const h=document.createElement('div');h.className='year';h.innerHTML=`<h3>${esc(y)}</h3>`;app.appendChild(h);
+    const g=document.createElement('div');g.className='grid';app.appendChild(g);
+    byYear[y].forEach(r=>{const c=document.createElement('div');c.className='card';c.tabIndex=0;
+      c.innerHTML=`<div class="cover">${r===newest?'<span class="tag">LATEST</span>':''}<div class="ph">${esc(r.month.toUpperCase())}</div></div>
+      <div class="meta"><h4>${esc(r.title)}</h4><div class="sub">${r.issue?'Issue #'+r.issue+' · ':''}Smoky Mountain Investor Report</div></div>`;
+      c.onclick=()=>openViewer(r);c.onkeydown=e=>{if(e.key==='Enter')openViewer(r)};g.appendChild(c);
+      const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){io.disconnect();renderCover(r,c.querySelector('.cover'))}});io.observe(c);
+    });
+  });
+}
+
+/* ---- viewer ---- */
+const V=document.getElementById('viewer'),cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+let doc=null,page=1,busy=false,pending=null;
+async function openViewer(r){
+  V.classList.add('on');document.body.style.overflow='hidden';if(window!==window.top)parent.postMessage({smir:'open'},'*');
+  document.getElementById('vt').innerHTML=`<small>Investor Report</small>${esc(r.title)}${r.year?' '+r.year:''}`;
+  const dl=document.getElementById('dl');dl.href=r.url;dl.setAttribute('download',r.file);
+  document.getElementById('spin').style.display='';cv.style.visibility='hidden';
+  doc=await getDoc(r.url);page=1;await new Promise(r=>setTimeout(r,60));await draw();
+  try{history.replaceState(null,'','#'+encodeURIComponent(r.file))}catch(e){}
+}
+async function draw(){
+  if(busy){pending=page;return}busy=true;
+  const p=await doc.getPage(page);const st=document.getElementById('stage');
+  const vp=p.getViewport({scale:1});const fit=Math.min((st.clientWidth-40)/vp.width,(st.clientHeight-30)/vp.height);
+  const dpr=Math.min(window.devicePixelRatio||1,2);const v=p.getViewport({scale:fit*dpr});
+  cv.width=v.width;cv.height=v.height;cv.style.width=(v.width/dpr)+'px';cv.style.height=(v.height/dpr)+'px';
+  await p.render({canvasContext:ctx,viewport:v}).promise;
+  document.getElementById('spin').style.display='none';cv.style.visibility='visible';
+  document.getElementById('pg').textContent=`Page ${page} of ${doc.numPages}`;
+  document.getElementById('pb').style.width=(page/doc.numPages*100)+'%';
+  document.getElementById('pv').disabled=page<=1;document.getElementById('nx').disabled=page>=doc.numPages;
+  busy=false;if(pending!==null){pending=null;draw()}
+}
+function go(d){if(!doc)return;const n=page+d;if(n<1||n>doc.numPages)return;page=n;draw()}
+function closeV(){V.classList.remove('on');if(window!==window.top)parent.postMessage({smir:'close'},'*');document.body.style.overflow='';if(document.fullscreenElement)document.exitFullscreen();try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
+document.getElementById('pv').onclick=()=>go(-1);document.getElementById('nx').onclick=()=>go(1);
+document.getElementById('cl').onclick=closeV;
+document.getElementById('fs').onclick=()=>{document.fullscreenElement?document.exitFullscreen():V.requestFullscreen&&V.requestFullscreen()};
+document.addEventListener('keydown',e=>{if(!V.classList.contains('on'))return;if(e.key==='ArrowRight'||e.key===' ')go(1);if(e.key==='ArrowLeft')go(-1);if(e.key==='Escape')closeV()});
+let tx=null;const stg=document.getElementById('stage');
+stg.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+stg.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>45)go(dx<0?1:-1);tx=null});
+window.addEventListener('resize',()=>{if(V.classList.contains('on')&&doc)draw()});
+
+/* ---- boot ---- */
+(async()=>{
+  let reps;try{reps=await list()}catch(e){app.innerHTML='<div class="msg">The reports could not be loaded right now. Please refresh in a moment.</div>';return}
+  app.innerHTML='';
+  if(!reps.length){app.innerHTML='<div class="msg">The first edition is coming soon.</div>';return}
+  const newest=reps[0];
+  if(MODE==='latest'||MODE==='all')drawLatest(newest);
+  if(MODE==='archive'||MODE==='all')drawArchive(MODE==='all'?reps.slice(1):reps,newest);
+  const h=decodeURIComponent(location.hash.slice(1));const hit=h&&reps.find(r=>r.file===h);if(hit)openViewer(hit);
+  if(window!==window.top){const post=()=>parent.postMessage({smirHeight:document.documentElement.scrollHeight},'*');post();new ResizeObserver(post).observe(document.body)}
+})();
+</script>
+</body>
+</html>
